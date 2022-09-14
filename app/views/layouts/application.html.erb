@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog World</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="main_body">
+    <%= render "layouts/navbar" %> <br><br>
+    <%= yield %>
+  </body>
+</html>
+<!--I didn't even know that this folder existed, so I had a lot of trouble
+with my attempt at CSS styling earlier today (September 2, 2022). I am
+quite ashamed because I thought that you couldn't change the title of
+the application's webpage and whatnot... -->

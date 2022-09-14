@@ -1,0 +1,13 @@
+<h1> New Article </h1>
+
+<%= form_with model: @article do |form| %>
+
+<%= render "form", article: @article %>
+
+<% end %>
+
+
+<!--The form_with helper method instantiates a form builder. In the form_with
+block we call methods like label and text_field on the form builder to output
+the appropriate form elements.
+-->

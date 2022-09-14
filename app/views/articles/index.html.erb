@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<div class="tuscany_hero_image">
+  <div class="tuscany_hero_text">
+    <h1>Welcome To Blog World</h1>
+    <p>Our blog has <%= Article.public_count %> public articles and counting!</p>
+    <!--Article.public_count comes from the 'Visible' file. -->
+  </div>
+</div><br>
+<br> <br>
+
+<!--I'm not proud of it, but this has to be done. I'm going to try and
+make a dropdown list so that the application will look even better. In order
+to do that, I will create a prototype of the dropdown article list and then
+try and make it happen with the real list. This could get very ugly and
+possibly break the whole project. This is now my third attempt:-->
+<div class="article_drop">
+  <button class="article_drop_button">Our Content</button>
+  <div class="article_drop_content">
+    <ul>
+      <% @articles.each do |article| %>
+        <% unless article.archived? %>
+          <li>
+            <%= link_to article.title, article %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+
+<!--The following refers to the loop nested in the unordered list:
+The link_to helper renders a link with its first argument as the link's text and
+its second argument as the link's destination. If we pass a model object as the
+second argument, link_to will call the appropriate path helper to convert the
+object to a path. For example, if we pass an article, link_to will call
+article_path. So app/views/articles/index.html.erb becomes:
+<li>
+       link_to article.title, article (percentage <>'s implied)
+    </li>
+
+  when it used to be:
+  <li>
+    <a href=" article_path(article)">
+       article.title
+    </a>
+  </li> (percantage <>'s implied once again) -->
+<!-- I do not need this button anymore as it messes up the look of the app. It
+will be kept solely as a last-resort option in that creating a new article
+becomes broken.
+<div class="new_article_button">
+  <%#= link_to "New Article", new_article_path %>
+</div>--> <br><br><br>
+<footer class="indexfoot">
+  Created by: Ethan
+</footer>
+</html>
+
+
+<!--KEEP THIS COMMENT CLOSED UNLESS THE DROPDOWN MENU HAS FAILED
+The following chunk of code was used for creating a list of articles. It
+has since been replaced by the dropdown menu that I implemented, but in the
+event that the dropdown menu is met with catastrophic failure, I will have
+this reliable code to rely on:
+
+<ol class="article_list">
+  <% @articles.each do |article| %>
+    <% unless article.archived? %>
+      <li class="article_list_item">
+        <%= link_to article.title, article %>
+      </li>
+    <% end %>
+  <% end %>
+</ol>  -->

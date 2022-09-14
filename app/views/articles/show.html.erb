@@ -1,0 +1,90 @@
+<!--This page controls what the user sees once an article loads. Its styling is
+located under the 'show.html.erb' section of 'application.css'. -->
+
+
+
+<div class="garden_hero_image">
+  <div class="garden_hero_text">
+    <h1> <%= @article.title %> </h1>
+  </div>
+</div><br><br><br>
+
+<!--This div would have been lumped with the heading, but that forced it to
+sit inside of the picture, which I do not want. So, it will sit below it instead
+to make the application drastically more presentable. -->
+<div class="article_body">
+  <p> <%=@article.body%> </p>
+</div><br>
+
+<div class="edit_and_destroy_buttons">
+  <ul>
+    <li> <%= link_to "Edit", edit_article_path(@article) %> </li>
+    <li> <%= link_to "Destroy", article_path(@article), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure you want to delete this item?"
+    } %> </li>
+    <!--It was just 'Are you sure?' in the tutorial but I thought it would be
+  better to go ahead and make the warning sound a little nicer. -->
+  </ul>
+</div><br><br>
+
+<h2>Comments</h2>
+<div class="comment_item">
+<%= render @article.comments %>
+</div>
+<!--The above code works because of the _comment partial file.
+
+How it works: This will now render the partial in
+app/views/comments/_comment.html.erb once for each comment that is in the
+@article.comments collection. As the render method iterates over the
+@article.comments collection, it assigns each comment to a local variable named
+the same as the partial, in this case comment, which is then available in the
+partial for us to show.
+ -->
+
+<!--The following code in this comment is now obsolete, but might be slightly
+helpful later. Who knows? Chissa?
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+ Now (with the above h2 code) you can add articles and comments to your blog
+ and have them show up in the right places.-->
+
+<h2>Add A Comment</h2>
+<%= render 'comments/form' %>
+<!--The following code in this comment is now obsolete, same as the chunk above.
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %> <br>
+    <%= form.text_field :commenter %>
+  </p>
+
+  <p>
+    <%= form.label :body %> <br>
+    <%= form.text_area :body %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+This (h2) adds a form on the Article show page that creates a new comment by
+calling the CommentsController create action. The form_with call here uses an
+array, which will build a nested route, such as /articles/1/comments.
+<% end %>
+-->
+
+<!--In the above code, we use the data option to set the data-turbo-method and
+data-turbo-confirm HTML attributes of the "Destroy" link. Both of these
+attributes hook into Turbo, which is included by default in fresh Rails
+applications. data-turbo-method="delete" will cause the link to make a DELETE
+request instead of a GET request. data-turbo-confirm="Are you sure?" will cause
+a confirmation dialog to appear when the link is clicked. If the user cancels
+the dialog, the request will be aborted. -->

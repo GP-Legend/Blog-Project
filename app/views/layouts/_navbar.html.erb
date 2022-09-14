@@ -1,0 +1,24 @@
+<header class="navigation_header">
+
+  <div class="navigation_bar">
+
+    <nav class="navigation_main">
+        <ul class="navigation_unordered_list">
+          <!--If I told you that it took me over an hour just to make the home
+        button, would you believe me? For the longest time, I couldn't quite
+      figure out where exactly the home button was supposed to link to. I
+    tried a million times to make it point towards index.html.erb because that
+  is the file which loads first. There didn't seem to be any help online and
+  I don't want to open an account on Stack Overflow, so I told myself "It's
+  over". As it turns out, it's not over! Rather, it never began. -->
+          <div class="navigation_list_item">
+          <li> <%= link_to "Home", "http://localhost:3000/" %> </li>
+          <li> <%= link_to "Create", new_article_path %> </li>
+        </div>
+        </ul>
+
+    </nav>
+
+  </div>
+
+</header>
